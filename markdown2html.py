@@ -19,19 +19,19 @@ def convert(markdownFile, htmlFile):
                     if line == '':
                         i += 1
                         continue
-                    if line.startswith('######'):
+                    if line.startswith('###### '):
                         w.write('<h6>{}</h6>\n'.format(line[7:]))
-                    elif line.startswith('#####'):
+                    elif line.startswith('##### '):
                         w.write('<h5>{}</h5>\n'.format(line[6:]))
-                    elif line.startswith('####'):
+                    elif line.startswith('#### '):
                         w.write('<h4>{}</h4>\n'.format(line[5:]))
-                    elif line.startswith('###'):
+                    elif line.startswith('### '):
                         w.write('<h3>{}</h3>\n'.format(line[4:]))
-                    elif line.startswith('##'):
+                    elif line.startswith('## '):
                         w.write('<h2>{}</h2>\n'.format(line[3:]))
-                    elif line.startswith('#'):
+                    elif line.startswith('# '):
                         w.write('<h1>{}</h1>\n'.format(line[2:]))
-                    elif line.startswith('-'):
+                    elif line.startswith('- '):
                         listStr = ""
                         for j in range(i, len(textLines)):
                             if textLines[j].startswith('-'):
@@ -45,7 +45,7 @@ def convert(markdownFile, htmlFile):
                         listStr = re.sub(r'__(.*?)__', r'<em>\1</em>', listStr)
                         w.write("<ul>\n{}</ul>\n".format(listStr))
                         i = j
-                    elif line.startswith('*') and not line.startswith('**'):
+                    elif line.startswith('* '):
                         listStr = ""
                         for j in range(i, len(textLines)):
                             if textLines[j].startswith('*'):
