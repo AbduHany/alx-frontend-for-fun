@@ -3,6 +3,7 @@
 """
 import sys
 import re
+import hashlib
 
 
 def convert(markdownFile, htmlFile):
@@ -16,6 +17,8 @@ def convert(markdownFile, htmlFile):
                             r'\*\*(.*?)\*\*', r'<b>\1</b>', text
                             )
                 text = re.sub(r'__(.*?)__', r'<em>\1</em>', text)
+                text = re.sub(r'\[\[(.*?)\]\]', lambda m: f'{hashlib.md5(m.group(1).encode()).hexdigest()}', text)
+                text = re.sub(r'\(\((.*?)\)\)', lambda m: f'{re.sub("c", "", m.group(1), flags=re.IGNORECASE)}', text)
                 textLines = text.splitlines()
                 i = 0
                 while i < len(textLines):
