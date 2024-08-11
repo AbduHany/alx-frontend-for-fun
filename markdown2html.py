@@ -2,6 +2,7 @@
 """ This script converts markdown to HTML.
 """
 import sys
+import re
 
 
 def convert(markdownFile, htmlFile):
@@ -38,9 +39,13 @@ def convert(markdownFile, htmlFile):
                                     textLines[j][2:])
                             else:
                                 break
+                        listStr = re.sub(
+                            r'\*\*(.*?)\*\*', r'<b>\1</b>', listStr
+                            )
+                        listStr = re.sub(r'__(.*?)__', r'<em>\1</em>', listStr)
                         w.write("<ul>\n{}</ul>\n".format(listStr))
                         i = j
-                    elif line.startswith('*'):
+                    elif line.startswith('*') and not line.startswith('**'):
                         listStr = ""
                         for j in range(i, len(textLines)):
                             if textLines[j].startswith('*'):
@@ -48,6 +53,10 @@ def convert(markdownFile, htmlFile):
                                     textLines[j][2:])
                             else:
                                 break
+                        listStr = re.sub(
+                            r'\*\*(.*?)\*\*', r'<b>\1</b>', listStr
+                            )
+                        listStr = re.sub(r'__(.*?)__', r'<em>\1</em>', listStr)
                         w.write("<ol>\n{}</ol>\n".format(listStr))
                         i = j
                     else:
@@ -61,6 +70,10 @@ def convert(markdownFile, htmlFile):
                                 break
                             else:
                                 listStr += "{}\n<br/>\n".format(textLines[j])
+                        listStr = re.sub(
+                            r'\*\*(.*?)\*\*', r'<b>\1</b>', listStr
+                            )
+                        listStr = re.sub(r'__(.*?)__', r'<em>\1</em>', listStr)
                         w.write("<p>\n{}\n</p>\n".format(listStr))
                         i = j
                     i += 1
