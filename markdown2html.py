@@ -12,6 +12,10 @@ def convert(markdownFile, htmlFile):
         with open(markdownFile, 'r') as r:
             with open(htmlFile, 'w') as w:
                 text = r.read()
+                text = re.sub(
+                            r'\*\*(.*?)\*\*', r'<b>\1</b>', text
+                            )
+                text = re.sub(r'__(.*?)__', r'<em>\1</em>', text)
                 textLines = text.splitlines()
                 i = 0
                 while i < len(textLines):
@@ -39,10 +43,6 @@ def convert(markdownFile, htmlFile):
                                     textLines[j][2:])
                             else:
                                 break
-                        listStr = re.sub(
-                            r'\*\*(.*?)\*\*', r'<b>\1</b>', listStr
-                            )
-                        listStr = re.sub(r'__(.*?)__', r'<em>\1</em>', listStr)
                         w.write("<ul>\n{}</ul>\n".format(listStr))
                         i = j
                     elif line.startswith('* '):
@@ -53,10 +53,6 @@ def convert(markdownFile, htmlFile):
                                     textLines[j][2:])
                             else:
                                 break
-                        listStr = re.sub(
-                            r'\*\*(.*?)\*\*', r'<b>\1</b>', listStr
-                            )
-                        listStr = re.sub(r'__(.*?)__', r'<em>\1</em>', listStr)
                         w.write("<ol>\n{}</ol>\n".format(listStr))
                         i = j
                     else:
@@ -70,10 +66,6 @@ def convert(markdownFile, htmlFile):
                                 break
                             else:
                                 listStr += "{}\n<br/>\n".format(textLines[j])
-                        listStr = re.sub(
-                            r'\*\*(.*?)\*\*', r'<b>\1</b>', listStr
-                            )
-                        listStr = re.sub(r'__(.*?)__', r'<em>\1</em>', listStr)
                         w.write("<p>\n{}\n</p>\n".format(listStr))
                         i = j
                     i += 1
