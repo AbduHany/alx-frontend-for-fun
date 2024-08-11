@@ -40,6 +40,16 @@ def convert(markdownFile, htmlFile):
                                 break
                         w.write("<ul>\n{}</ul>\n".format(listStr))
                         i = j
+                    elif line.startswith('*'):
+                        listStr = ""
+                        for j in range(i, len(textLines)):
+                            if textLines[j].startswith('*'):
+                                listStr += "<li>{}</li>\n".format(
+                                    textLines[j][2:])
+                            else:
+                                break
+                        w.write("<ol>\n{}</ol>\n".format(listStr))
+                        i = j
                     else:
                         w.write(line)
                     i += 1
