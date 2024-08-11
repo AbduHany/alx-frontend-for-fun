@@ -51,10 +51,21 @@ def convert(markdownFile, htmlFile):
                         w.write("<ol>\n{}</ol>\n".format(listStr))
                         i = j
                     else:
-                        w.write(line)
+                        listStr = ""
+                        for j in range(i, len(textLines)):
+                            if j+1 < len(textLines) and textLines[j + 1] == '':
+                                listStr += "{}".format(textLines[j])
+                                break
+                            elif j+1 >= len(textLines):
+                                listStr += "{}".format(textLines[j])
+                                break
+                            else:
+                                listStr += "{}\n<br/>\n".format(textLines[j])
+                        w.write("<p>\n{}\n</p>\n".format(listStr))
+                        i = j
                     i += 1
-
-    except Exception:
+    except Exception as e:
+        print(e, file=sys.stderr)
         print("Missing {}".format(markdownFile), file=sys.stderr)
         sys.exit(1)
     sys.exit(0)
