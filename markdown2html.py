@@ -70,7 +70,6 @@ def convert(markdownFile, htmlFile):
                         i = j
                     i += 1
     except Exception as e:
-        print(e, file=sys.stderr)
         print("Missing {}".format(markdownFile), file=sys.stderr)
         sys.exit(1)
     sys.exit(0)
