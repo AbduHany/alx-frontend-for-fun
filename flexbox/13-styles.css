@@ -724,7 +724,6 @@ html {
 
   /* Post Meta
     ============================= */
-
   .post-meta-list {
     flex-direction: column;
   }
@@ -742,13 +741,14 @@ html {
     border-bottom: 0.2rem solid var(--color-light-grey);
   }
 
-  .post-meta-list [class^='post-meta'] {
+  .post-meta-list [class^='post-meta']:last-child {
     border: none;
     margin-bottom: 3rem;
   }
 
   /* Tag list
-    ============================= */
+      ============================= */
+
   .tag-list {
     padding: 0;
     list-style: none;
@@ -759,7 +759,7 @@ html {
   }
 
   .tag-list li::after {
-    content: ", ";
+    content: ', ';
   }
 
   .tag-list li:last-child::after {
