@@ -18,6 +18,7 @@
     background-color: white;
     border-radius: 2px;
     margin-top: 5px;
+    transition: 0.5s ease;
 }
 
 
@@ -30,7 +31,8 @@
     height: 50px;
     background-color: #e1003c;
     border-radius: 50%;
-    margin: 10px
+    margin: 10px;
+    transition: 0.5s ease;
 }
 
 /* hamburger menu items */
