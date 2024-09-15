@@ -1,0 +1,13 @@
+/* Margin mixin */
+@mixin marin-cal($mar: 10px) {
+    margin-left: $mar;
+    margin-right: $mar;
+}
+
+body {
+    @include marin-cal;
+}
+
+div {
+    @include marin-cal($mar: 15px);
+}
